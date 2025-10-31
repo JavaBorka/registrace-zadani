@@ -8,6 +8,7 @@ interface User {
     passwordConfirm: string
 }
 
+
 export const Registration = () => {
     const [user,setUser] = useState<User>({
         username: '',
@@ -15,6 +16,16 @@ export const Registration = () => {
         password: '',
         passwordConfirm: '',
     })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const name = e.target.name
+        const value = e.target.value
+
+        setUser({
+            ...user,
+            [name]: value
+        })
+    }
 
     return (
         <>
@@ -25,28 +36,30 @@ export const Registration = () => {
                 <form className="registration-form">
                     <label htmlFor="email">Email Address</label>
                     <input 
-                        type="email" id="email" placeholder="Enter your email"
+                        type="email" id="email" name="email" placeholder="Enter your email"
                         value={user.email}
-                        
+                        onChange={handleChange}
                     />
                     <label htmlFor="username">User Name</label>
                     <input 
-                        type="text" id="username" placeholder="Choose a username"
+                        type="text" id="username" name="username" placeholder="Choose a username"
                         value={user.username}
+                        onChange={handleChange}
 
                     />
                     <label htmlFor="password">Password</label>
                     <input 
-                        type="password" id="password" placeholder="Enter password"
+                        type="password" id="password" name="password" placeholder="Enter password"
                         value={user.password}
+                        onChange={handleChange}
                         
                     />
 
                     <label htmlFor="confirm-password">Confirm Password</label>
                     <input 
-                        type="password" id="confirm-password" placeholder="Confirm password"
+                        type="password" id="confirm-password" name="passwordConfirm" placeholder="Confirm password"
                         value={user.passwordConfirm}
-
+                        onChange={handleChange}
                     />
 
                     <button type="submit">Register</button>
