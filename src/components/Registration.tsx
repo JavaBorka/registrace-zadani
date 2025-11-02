@@ -32,13 +32,21 @@ export const Registration = () => {
         setUser(newUser)
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(user)
+    }
+
     return (
         <>
             <div className="registration-card">
             <div className="profile-placeholder">
                 <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User" />
             </div>
-                <form className="registration-form">
+                <form 
+                    className="registration-form"
+                    onSubmit={handleSubmit}
+                >
                     <label htmlFor="email">Email Address</label>
                     <input 
                         type="email" id="email" name="email" placeholder="Enter your email"
