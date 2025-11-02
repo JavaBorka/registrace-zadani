@@ -8,7 +8,6 @@ interface User {
     passwordConfirm: string
 }
 
-
 export const Registration = () => {
     const [user,setUser] = useState<User>({
         username: '',
@@ -20,11 +19,17 @@ export const Registration = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const name = e.target.name
         const value = e.target.value
-
-        setUser({
+       
+        const newUser = {
             ...user,
-            [name]: value
-        })
+            [name]: value,
+            ...(name === 'email' && value.includes('@') ?
+                {username: value.split('@')[0]} :
+                {}
+            )
+        }
+
+        setUser(newUser)
     }
 
     return (
@@ -45,14 +50,12 @@ export const Registration = () => {
                         type="text" id="username" name="username" placeholder="Choose a username"
                         value={user.username}
                         onChange={handleChange}
-
                     />
                     <label htmlFor="password">Password</label>
                     <input 
                         type="password" id="password" name="password" placeholder="Enter password"
                         value={user.password}
                         onChange={handleChange}
-                        
                     />
 
                     <label htmlFor="confirm-password">Confirm Password</label>
